@@ -12,14 +12,13 @@
 		channel.publish('update', { Time: Date.now().toString() });
 	}
 
-	onMount(async () => {
+
 		const ably = new Ably.Realtime(apiKey);
 		channel = ably.channels.get('time');
 
 		sub = channel.subscribe((msg) => {
 			time = JSON.stringify(msg.data);
 		});
-	});
 </script>
 
 <svelte:head>
