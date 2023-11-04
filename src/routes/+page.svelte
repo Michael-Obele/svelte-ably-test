@@ -12,13 +12,12 @@
 		channel.publish('update', { Time: Date.now().toString() });
 	}
 
+	const ably = new Ably.Realtime(apiKey);
+	channel = ably.channels.get('time');
 
-		const ably = new Ably.Realtime(apiKey);
-		channel = ably.channels.get('time');
-
-		sub = channel.subscribe((msg) => {
-			time = JSON.stringify(msg.data);
-		});
+	sub = channel.subscribe((msg) => {
+		time = JSON.stringify(msg.data);
+	});
 </script>
 
 <svelte:head>
@@ -31,7 +30,7 @@
 		Ably JS and Svelte Test
 	</h1>
 
-	<p class=" text-lg">This Works</p>
+	<p class=" text-lg">This doesn't work</p>
 
 	<h3 class=" text-2xl">{time}</h3>
 
